@@ -81,7 +81,7 @@ public class InputString {
     public static void main(String[] args) {
 
         String str;
-        char c = 'o'; //символът, който търсим в низа
+        char c = 'o'; //символът, който търсим в низа/
         Scanner input = new Scanner(System.in);
         //въвеждаме низ от клавиатурата
         System.out.println("Enter your string: ");
