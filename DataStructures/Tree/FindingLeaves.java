@@ -7,52 +7,32 @@ public class Main {
     
     public static void main(String[] args) { 
         String numberOfEdges = scanner.nextLine();
-        String[] array = new String[Integer.parseInt(numberOfEdges)];
+        int numberOfEdges = scanner.nextInt();
         
         inputElements(numberOfEdges, array);
 
-        ArrayList<String> parents = new ArrayList<>();
-        ArrayList<String> children = new ArrayList<>();
+        ArrayList<Integer> parents = new ArrayList<>();
+        ArrayList<Integer> children = new ArrayList<>();
 
-        for (String element : array) {
-            String[] str = element.split(" ");
-            parents.add(str[0]);
-            children.add(str[1]);
-        }
-
-        ArrayList<String> leaves = new ArrayList<>();
+        inputElements(numberOfEdges, parents, children);
         
-        findChildren(leaves, children, parents);
+        findLeaves(children, parents);
         printLeaves(leaves);
     }
     
-    public static void inputElements(String numberOfEdges, String[] array) {
-        for (int i = 0; i < Integer.parseInt(numberOfEdges); i++) {
-            array[i] = scanner.nextLine();
+    public static void inputElements(int numberOfEdges, ArrayList<Integer> parents, ArrayList<Integer> children) {
+         for (int i = 0; i < numberOfEdges; i++) {
+            parents.add(scanner.nextInt());
+            children.add(scanner.nextInt());
         }
     }
     
-    public static void findChildren(ArrayList<String> leaves, ArrayList<String> children, ArrayList<String> parents) {
-        int p = 0;
-        while (p < children.size()) {
-            int br = 1;
-            String child = children.get(p);
-            for (String element : parents) {
-                if (child.equals(element)) {
-                    ++br;
-                }
-            }
-            if (br == 1) {
-                leaves.add(child);
-            }
-            ++p;
-        }
+    public static void findLeaves(ArrayList<Integer> children, ArrayList<Integer> parents) {
+        children.removeAll(parents);
     }
     
-    public static void printLeaves(ArrayList<String> leaves) {
-        System.out.println(leaves.size());
-        for (String s : leaves) {
-            System.out.print(s + " ");
-        }
+    public static void printLeaves(ArrayList<Integer> children) {
+        System.out.println(children.size());
+        children.forEach(child -> System.out.print(child + " "));
     }
 }
